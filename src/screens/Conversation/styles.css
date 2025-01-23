@@ -1,0 +1,150 @@
+.chat-container {
+  display: grid;
+  grid-template-columns: 375px 1fr;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  overflow: hidden;
+
+  .chat-header {
+    .active-filter {
+      background-color: #ddebfc !important;
+      color: #153c60;
+      font-weight: 600;
+    }
+
+    .icon-button {
+      border-radius: 15px;
+      background-color: #f4f5f7;
+    }
+
+    .icon-button.plus {
+      margin-left: 1rem;
+      background-color: #007aff;
+      color: #fff;
+    }
+
+    .title {
+      margin-top: 26px;
+      font-weight: bold;
+      grid-area: header;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      border-radius: 8px;
+      background-color: #f4f5f7;
+      padding: 3px 16px;
+      grid-area: search;
+    }
+  }
+
+  .filter-chip {
+    flex: 1;
+    margin: 0 4px !important;
+
+    &.small {
+      max-width: 50px;
+    }
+  }
+
+  .conversations {
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    grid-row: 1 / -1;
+    padding: 0.5rem;
+  }
+
+  .conversation {
+    cursor: pointer;
+    border-bottom: 1px solid lightgray;
+
+    .primary-text {
+      font-weight: 600;
+    }
+
+    .secondary-box {
+      display: flex;
+      align-items: center;
+    }
+
+    .secondary-box .icon {
+      margin-right: 1rem;
+    }
+
+    .date {
+      margin-left: 2rem;
+    }
+  }
+
+  .messages {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 10rem);
+  }
+
+  .messages,
+  .conversations,
+  .message-header,
+  .input-box {
+    transition: transform 0.4s, opacity 0.3s;
+  }
+
+  .filter-box {
+    display: flex;
+    padding: 8px 0;
+  }
+}
+
+/* Tablet view */
+@media (max-width: 768px) {
+  .chat-container {
+    gap: 0;
+    grid-template-columns: 45vw 1fr;
+  }
+}
+
+/* Mobile view */
+@media (max-width: 600px) {
+  .chat-container {
+    gap: 0;
+    grid-template-columns: 100vw 100vw;
+
+    &.conversations-mode .message-header,
+    &.conversations-mode .messages, &.conversations-mode .input-box {
+      transform: translateX(100%);
+      transition-timing-function: ease-in;
+      opacity: 0;
+    }
+
+    &.conversations-mode .conversations {
+      opacity: 1;
+      transition-timing-function: ease-out;
+    }
+
+    &.messages-mode .message-header,
+    &.messages-mode .messages,
+    &.messages-mode .input-box {
+      transform: translateX(-100%);
+      transition-timing-function: ease-out;
+      opacity: 1;
+    }
+
+    &.messages-mode .conversations {
+      transform: translateX(-100%);
+      transition-timing-function: ease-in;
+      opacity: 0;
+    }
+  }
+}
+
+@media (min-width: 600px) {
+  .message-header .go-back {
+    display: none;
+  }
+}
